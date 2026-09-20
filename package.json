@@ -1,0 +1,13 @@
+{
+  "name": "seo-checker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SEO 檢測工具",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "jsdom": "^30.1.0"
+  }
+}

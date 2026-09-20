@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEO 檢測工具</title>
+<meta name="description" content="免費 SEO 檢測工具:一鍵檢查標題、描述、標題結構、失效連結、關鍵字、Core Web Vitals,並提供可直接套用的修正建議。">
+<meta property="og:title" content="SEO 檢測工具">
+<meta property="og:description" content="一鍵檢查網頁 SEO,附修正建議與評分。">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <h1>🔍 SEO 檢測工具</h1>
+  <p class="sub">輸入網址,檢查 30 多項 SEO 指標,每個問題都附上修正建議。</p>
+
+  <div class="card no-print">
+    <div class="tabs">
+      <button class="tab on" data-m="single">單頁檢測</button>
+      <button class="tab" data-m="batch">整站批次(sitemap)</button>
+      <button class="tab" data-m="history">歷史紀錄</button>
+    </div>
+
+    <div id="p-single">
+      <div class="row"><input id="url" type="text" placeholder="https://example.com" autocomplete="off"><button class="go" id="goSingle">開始檢測</button></div>
+      <div class="row" style="margin-top:8px"><input id="kw" type="text" placeholder="(選填)目標關鍵字,例如:台北咖啡廳"></div>
+      <div class="opts">
+        <label><input type="checkbox" id="optLinks"> 檢查失效連結(較慢)</label>
+        <label><input type="checkbox" id="optPsi"> Core Web Vitals(PageSpeed,約 20–60 秒)</label>
+      </div>
+    </div>
+
+    <div id="p-batch" class="hidden">
+      <div class="row"><input id="siteUrl" type="text" placeholder="https://example.com(將讀取 /sitemap.xml)"><button class="go" id="goBatch">載入 sitemap 並檢測</button></div>
+      <p class="hint">最多檢測前 50 個頁面,逐頁分析,完成後可匯出 CSV。</p>
+    </div>
+
+    <div id="p-history" class="hidden"><div id="histList"></div></div>
+    <div class="err" id="err"></div>
+  </div>
+
+  <div id="batchBox" class="card hidden no-print">
+    <div class="between"><h2 id="batchTitle">批次結果</h2><button class="btn" id="exportBatch">匯出 CSV</button></div>
+    <div class="tbl-wrap"><table id="batchTbl"><thead><tr><th>網址</th><th>分數</th><th>錯誤</th><th>建議</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <div id="result" class="hidden"></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
