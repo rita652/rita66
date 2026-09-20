@@ -1,0 +1,97 @@
+[
+  {
+    "id": "6a33f28d-6731-4c22-a9d9-a47c6cf3bdbc",
+    "createdAt": "2026-09-20T07:20:57.853Z",
+    "history": [
+      {
+        "at": "2026-09-20T07:20:58.535Z",
+        "score": 62,
+        "bad": 3,
+        "warn": 9
+      },
+      {
+        "at": "2026-09-20T07:21:35.503Z",
+        "score": 62,
+        "bad": 3,
+        "warn": 9
+      },
+      {
+        "at": "2026-09-20T07:21:49.310Z",
+        "score": 62,
+        "bad": 3,
+        "warn": 9
+      }
+    ],
+    "lastIssues": [
+      {
+        "s": "bad",
+        "group": "伺服器與效能",
+        "title": "HTTP 狀態碼 403",
+        "fix": "確保正式頁面回傳 200;已搬家的頁面請用 301 轉址。"
+      },
+      {
+        "s": "bad",
+        "group": "基本設定",
+        "title": "robots meta 設為 noindex",
+        "fix": "移除 noindex,或改成 <meta name=\"robots\" content=\"index, follow\">"
+      },
+      {
+        "s": "bad",
+        "group": "基本設定",
+        "title": "缺少 meta description",
+        "fix": "<meta name=\"description\" content=\"用 50–80 字說明此頁內容與價值\">"
+      },
+      {
+        "s": "warn",
+        "group": "基本設定",
+        "title": "標題長度不理想(顯示寬度 15,約 15 字)",
+        "fix": "調整為簡潔且包含主要關鍵字的標題。"
+      },
+      {
+        "s": "warn",
+        "group": "基本設定",
+        "title": "未設定 canonical",
+        "fix": "<link rel=\"canonical\" href=\"https://www.weddings.tw/\">"
+      },
+      {
+        "s": "warn",
+        "group": "內容與連結",
+        "title": "內容偏少(約 15 字)",
+        "fix": "補充有價值、能回答使用者搜尋意圖的內容(建議 300 字以上)。"
+      },
+      {
+        "s": "warn",
+        "group": "進階",
+        "title": "未偵測到結構化資料",
+        "fix": "<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"品牌名稱\",\"url\":\"https://example.com\"}</script>"
+      },
+      {
+        "s": "warn",
+        "group": "基本設定",
+        "title": "未偵測到 favicon",
+        "fix": "<link rel=\"icon\" href=\"/favicon.ico\">"
+      },
+      {
+        "s": "warn",
+        "group": "社群分享",
+        "title": "缺少 Open Graph 標籤",
+        "fix": "<meta property=\"og:title\" content=\"...\">\n<meta property=\"og:description\" content=\"...\">\n<meta property=\"og:image\" content=\"https://.../cover.jpg\">\n<meta property=\"og:url\" content=\"...\">"
+      },
+      {
+        "s": "warn",
+        "group": "社群分享",
+        "title": "未設定 Twitter Card",
+        "fix": "<meta name=\"twitter:card\" content=\"summary_large_image\">"
+      }
+    ],
+    "name": "weddings",
+    "url": "https://www.weddings.tw/",
+    "keywords": [],
+    "owner": "rita",
+    "department": "",
+    "notes": "",
+    "type": "官網",
+    "status": "營運中",
+    "lastError": null
+  }
+]

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>網站 SEO 管理</title>
+<meta name="description" content="集中管理公司所有網站的 SEO 分數、負責人與待辦問題。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav"><a href="index.html">單頁檢測</a><a class="on" href="manage.html">網站管理</a></nav>
+  <h1>📊 公司網站 SEO 管理</h1>
+  <p class="sub">登記所有網站,統一檢測、追蹤分數變化,找出最需要優先處理的站。</p>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="card">
+    <div class="bar">
+      <input id="q" type="text" placeholder="搜尋名稱、網址、負責人、關鍵字…">
+      <select id="fStatus"><option value="">全部狀態</option></select>
+      <select id="fType"><option value="">全部類型</option></select>
+      <button class="go" id="add">＋ 新增網站</button>
+      <button class="btn" id="scanAll">全部重新檢測</button>
+      <button class="btn" id="csv">匯出 CSV</button>
+    </div>
+    <div class="err" id="err"></div>
+    <div class="tbl-wrap"><table id="tbl"><thead><tr>
+      <th>網站</th><th>負責人</th><th>SEO 分數</th><th>錯誤/建議</th><th>最近檢測</th><th></th></tr></thead><tbody></tbody></table></div>
+    <p class="hint" id="empty"></p>
+  </div>
+</div>
+
+<dialog id="dlgForm"><form method="dialog" id="form">
+  <h2 id="formTitle">新增網站</h2>
+  <label>網站名稱 *<input name="name" required maxlength="80" placeholder="例如:品牌官網"></label>
+  <label>網址 *<input name="url" required placeholder="https://www.example.com"></label>
+  <div class="two">
+    <label>負責人<input name="owner" maxlength="60"></label>
+    <label>部門 / 品牌<input name="department" maxlength="60"></label>
+    <label>網站類型<select name="type"></select></label>
+    <label>狀態<select name="status"></select></label>
+  </div>
+  <label>目標關鍵字(逗號分隔,第一個為主要關鍵字)<input name="keywords" placeholder="台北咖啡廳, 手沖咖啡"></label>
+  <label>備註<textarea name="notes" rows="2" maxlength="500"></textarea></label>
+  <div class="err" id="formErr"></div>
+  <div class="bar" style="margin:14px 0 0;justify-content:flex-end">
+    <button type="button" class="btn" id="cancel">取消</button><button class="go" id="save">儲存</button>
+  </div>
+</form></dialog>
+
+<dialog id="dlgDetail"><div id="detail"></div><div class="bar" style="margin:14px 0 0;justify-content:flex-end"><button class="btn" id="closeDetail">關閉</button></div></dialog>
+<script src="manage.js"></script>
+</body>
+</html>

@@ -4,6 +4,7 @@ const path = require('path');
 const { fetchPage, request, parseUrl } = require('./lib/net');
 const { analyze, summarize } = require('./lib/analyze');
 const { siteInfo, siteItems, checkLinks } = require('./lib/site');
+const store = require('./lib/store');
 
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || '127.0.0.1'; // 預設只開放本機;對外部署請自行設定 HOST 並注意濫用風險
@@ -100,6 +101,23 @@ const server = http.createServer(async (req, res) => {
       if (u.pathname === '/api/analyze' && req.method === 'POST') return send(res, 200, await handleAnalyze(await readJson(req)));
       if (u.pathname === '/api/sitemap' && req.method === 'POST') return send(res, 200, await handleSitemap(await readJson(req)));
       if (u.pathname === '/api/psi' && req.method === 'GET') return send(res, 200, await handlePsi(u.searchParams));
+      // ----- 網站管理 -----
+      if (u.pathname === '/api/sites' && req.method === 'GET') return send(res, 200, { sites: store.list(), types: store.TYPES, statuses: store.STATUSES });
+      if (u.pathname === '/api/sites' && req.method === 'POST') return send(res, 200, store.create(await readJson(req)));
+      const m = /^\/api\/sites\/([\w-]+)(\/scan)?$/.exec(u.pathname);
+      if (m) {
+        const id = m[1];
+        if (m[2] && req.method === 'POST') {
+          const site = store.get(id);
+          if (!site) return send(res, 404, { error: '找不到此網站' });
+          try {
+            const report = await handleAnalyze({ url: site.url, keyword: site.keywords[0], checkLinks: false });
+            return send(res, 200, store.recordScan(id, report));
+          } catch (e) { store.recordError(id, e.message); return send(res, 200, store.get(id)); }
+        }
+        if (req.method === 'PUT') return send(res, 200, store.update(id, await readJson(req)));
+        if (req.method === 'DELETE') { store.remove(id); return send(res, 200, { ok: true }); }
+      }
       return send(res, 404, { error: 'Not found' });
     }
     const file = path.normalize(path.join(PUBLIC, u.pathname === '/' ? 'index.html' : decodeURIComponent(u.pathname)));

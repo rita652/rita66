@@ -30,7 +30,7 @@ function renderHistory() {
 
 // ---------- API ----------
 async function api(path, opt) {
-  const r = await fetch(path, opt);
+  const r = await fetch(path, opt).catch(() => { throw new Error(location.protocol === 'file:' ? '請不要直接開啟檔案。先執行 npm start,再用 http://127.0.0.1:3000 開啟本頁。' : '無法連線到伺服器,請確認 npm start 是否正在執行。'); });
   const j = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error(j.error || '請求失敗 ' + r.status);
   return j;
@@ -140,3 +140,9 @@ $('#goBatch').onclick = e => withBusy(e.target, async () => {
   await Promise.all([worker(), worker()]);
 });
 $('#exportBatch').onclick = () => batchData.length && downloadCsv(batchData, 'seo-batch.csv');
+
+// 從網站管理頁跳轉過來時自動帶入網址並執行
+{
+  const p = new URLSearchParams(location.search);
+  if (p.get('url')) { $('#url').value = p.get('url'); $('#kw').value = p.get('kw') || ''; $('#goSingle').click(); }
+}
